@@ -1,0 +1,17 @@
+  <table>
+  	<tr>
+  		<th>Username</th>
+  		<th>Description</th>
+  		<th>Image</th>
+  	</tr>
+  	<% @post.each do |post| %>
+  	<tr>
+  		<td><%= post.user.name %></td>
+  		<td><%= post.description %></td>
+  		<td><%= post.image %></td>
+  		<td><%= link_to 'show', post_path(post.id) %></td>
+  		<td><%= link_to 'edit', edit_post_path(post.id) %></td>
+  		<td><%= link_to 'delete', post_path(post.id), method: :delete, data: {confirm: 'Delete this post?'} %></td>
+  	</tr>
+  	<% end %>
+  </table>
