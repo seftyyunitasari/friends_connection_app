@@ -1,4 +1,13 @@
 <h1>Post Detail Page</h1>
+
 <p>Username: <%= @post.user.name %></p>
 <p>Description: <%= @post.description %></p>
 <p>Image: <%= @post.image %></p>
+
+<% unless @post.user_id == current_user.id %>
+  <% if @like.present? %>
+    <%= link_to 'unlike', like_path(id: @like.id), method: :delete %>
+  <% else %>
+    <%= link_to 'like', likes_path(post_id: @post.id), method: :post %>
+   <% end %>
+<% end %>
