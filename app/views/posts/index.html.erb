@@ -8,10 +8,20 @@
   	<tr>
   		<td><%= post.user.name %></td>
   		<td><%= post.description %></td>
-  		<td><%= post.image %></td>
-  		<td><%= link_to 'show', post_path(post.id) %></td>
-  		<td><%= link_to 'edit', edit_post_path(post.id) %></td>
-  		<td><%= link_to 'delete', post_path(post.id), method: :delete, data: {confirm: 'Delete this post?'} %></td>
+        <td><%= image_tag(post.image.url) %></td>
+        <% @like = current_user.likes.find_by(post_id: post.id) %>
+          <% if @like.present? %>
+            <td><%= link_to 'unlike', like_path(id: @like.id), method: :delete %></td>
+          <% else %>
+            <td><%= link_to 'like', likes_path(post_id: post.id), method: :post %></td>
+          <% end %>
+        <% if post.user_id == current_user.id %>
+          <td><%= link_to 'show', post_path(post.id) %></td>
+          <td><%= link_to 'edit', edit_post_path(post.id) %></td>
+          <td><%= link_to 'delete', post_path(post.id), method: :delete, data: {confirm: 'Delete this post?'} %></td>
+        <% else %>
+          <td><%= link_to 'show', post_path(post.id) %></td>
+        <% end %>
   	</tr>
   	<% end %>
   </table>

@@ -11,6 +11,7 @@
   <%= f.label :description %>
   <%= f.text_field :description %>
   <%= f.label :image %>
-  <%= f.text_field :image %>
+  <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
+  <%= f.file_field :image %>
   <%= f.submit "post" %>
 <% end %>

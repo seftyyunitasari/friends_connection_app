@@ -1,9 +1,9 @@
 <h1>Confirmation Page</h1>
-<%= form_with(model: @post, local: true) do |f| %>
+<%= form_with(model: @post, local: true, url: confirmation_page) do |f| %>
   <%= f.hidden_field :description %>
-  <%= f.hidden_field :image %>
+  <%= f.hidden_field :image_cache %>
   <p>Description: <%= @post.description %></p>
-  <p>Image: <%= @post.image %></p>
+  <p>Image: <%= image_tag(@post.image.url) if @post.image && @post.image.url %></p>
   <%= f.submit 'Post' %>
   <%= f.submit 'Return', name: 'back' %>
 <% end %>

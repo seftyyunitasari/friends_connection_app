@@ -3,4 +3,5 @@ class Post < ApplicationRecord
   validates :description, length: {maximum: 255}
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+  mount_uploader :image, ImageUploader
 end
