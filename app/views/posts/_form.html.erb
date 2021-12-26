@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/new_post.css">
+
 <div class="error_explanation">
   <% if @post.errors.any? %>
     <h3><%= pluralize(@post.errors.count, 'error') %>: </h3>
@@ -8,10 +10,20 @@
 </div>
 
 <%= form_with(model: @post, local: true, url: confirmation_page) do |f| %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.label :image %>
-  <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
-  <%= f.file_field :image %>
-  <%= f.submit "post" %>
+<div class="new_post">
+  <div class="post_top">
+    <img class="user_avatar" src="/images/avatar.jpg">
+    <%= f.text_field :description, class: 'post_input', placeholder: "What's on your mind?" %>
+  </div>
+  <div class="post_middle">
+    <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
+  </div>
+  <div class="post_bottom">
+    <div class="post_options">
+      <%= f.file_field :image %>
+      <%= f.hidden_field :image_cache %>
+      <%= f.submit "post" %>
+    </div>
+  </div>
+</div>
 <% end %>

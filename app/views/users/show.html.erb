@@ -1,4 +1,17 @@
-<h1>Profile Page</h1>
-<p>Name: <%= @user.name %></p>
-<p>Email: <%= @user.email %></p>
-<%= link_to 'create a post', new_post_path %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
+
+<div class="profile_page">
+	<div class="cover">
+		<img src="/images/cover_pic.jpg">
+	</div>
+	<div class="avatar">
+		<img class="user_avatar post_avatar" src="/images/avatar.jpg">
+	</div>
+	<div class="bio">
+		<h3><%= @user.name %></h3>
+		<p><%= @user.email %></p>
+	</div>
+	<div class="button">
+		<p><%= link_to 'create a post', new_post_path, class: 'link' %></p>
+	</div>
+</div>

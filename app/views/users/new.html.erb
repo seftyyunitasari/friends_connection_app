@@ -1,4 +1,4 @@
-<h1>Create an account</h1>
+<link rel="stylesheet" type="text/css" href="/stylesheets/signin.css">
 
 <div class="error_explanation">
 	<% if @user.errors.any? %>
@@ -9,14 +9,26 @@
 	<% end %>
 </div>
 
-<%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit "create account" %>
-<% end %>
+<div class="signin_page">
+  <h3>create an account</h3>
+  <div class="form">
+    <%= form_with(model: @user, local: true) do |f| %>
+    <div class="input">
+      <%= f.text_field :name, placeholder: 'name', class: 'field' %>
+    </div>
+    <div class="input">
+      <%= f.email_field :email, placeholder: 'email', class: 'field' %>
+    </div>
+    <div class="input">
+      <%= f.password_field :password, placeholder: 'password', class: 'field' %>
+    </div>
+    <div class="input">
+      <%= f.password_field :password_confirmation, placeholder: 'confirm password', class: 'field' %>
+    </div>
+    <div class="button">
+      <%= f.submit "create account" %>  
+    </div>
+    <% end %>
+  </div>
+  <p>Already have an account?<a href="<%= new_session_path %>"> Log in</a></p>
+</div>

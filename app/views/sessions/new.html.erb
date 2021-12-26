@@ -1,8 +1,15 @@
-<h1>Login</h1>
-<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.submit 'Login' %>
-<% end %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+
+<div class="login_page">
+  <h2>friends</h2>
+  <div class="form">
+    <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+      <div class="input"><%= f.email_field :email, placeholder: 'email address', class: 'field' %></div>
+      <div class="input"><%= f.password_field :password, placeholder: 'password', class: 'field' %></div>
+   <div class="button">
+     <%= f.submit 'Login' %>
+     <% end %>
+   </div>
+  </div>
+  <p>Don't have an account?<a href="<%= new_user_path %>"> Sign in</a></p>
+</div>

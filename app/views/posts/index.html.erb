@@ -1,27 +1,54 @@
-  <table>
-  	<tr>
-  		<th>Username</th>
-  		<th>Description</th>
-  		<th>Image</th>
-  	</tr>
-  	<% @post.each do |post| %>
-  	<tr>
-  		<td><%= post.user.name %></td>
-  		<td><%= post.description %></td>
-        <td><%= image_tag(post.image.url) %></td>
-        <% @like = current_user.likes.find_by(post_id: post.id) %>
-          <% if @like.present? %>
-            <td><%= link_to 'unlike', like_path(id: @like.id), method: :delete %></td>
-          <% else %>
-            <td><%= link_to 'like', likes_path(post_id: post.id), method: :post %></td>
-          <% end %>
-        <% if post.user_id == current_user.id %>
-          <td><%= link_to 'show', post_path(post.id) %></td>
-          <td><%= link_to 'edit', edit_post_path(post.id) %></td>
-          <td><%= link_to 'delete', post_path(post.id), method: :delete, data: {confirm: 'Delete this post?'} %></td>
-        <% else %>
-          <td><%= link_to 'show', post_path(post.id) %></td>
-        <% end %>
-  	</tr>
-  	<% end %>
-  </table>
+<link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
+
+<% @post.each do |post| %>
+
+<div class="post">
+  <div class="post_top">
+    <img class="user_avatar post_avatar" src="/images/avatar.jpg">
+    <div class="post_top_info">
+      <h3><%= post.user.name %></h3>
+      <p><%= post.created_at%></p>
+    </div>
+  </div>
+
+  <div class="post_bottom">
+    <p><%= post.description %></p>
+  </div>
+
+  <div class="post_image">
+    <%= image_tag post.image.url %>
+  </div>
+
+  <div class="post_options">
+    <% @like = current_user.likes.find_by(post_id: post.id) %>
+      <% if @like.present? %>
+        <div class="post_option">
+          <p><%= link_to 'unlike', like_path(id: @like.id), method: :delete, class: 'link' %></p>
+        </div>
+      <% else %>
+        <div class="post_option">
+          <p><%= link_to 'like', likes_path(post_id: post.id), method: :post, class: 'link' %></p>
+        </div>
+      <% end %>
+
+    <% if post.user_id == current_user.id %>
+      <div class="post_option">
+        <p><%= link_to 'show', post_path(post.id), class: 'link' %></p>
+      </div>
+      <div class="post_option">
+        <p><%= link_to 'edit', edit_post_path(post.id), class: 'link' %></p>
+      </div>
+      <div class="post_option">
+        <p><%= link_to 'delete', post_path(post.id), method: :delete, data: {confirm: 'Delete this post?'}, class: 'link' %></p>
+      </div>
+    <% else %>
+      <div class="post_option">
+        <p><%= link_to 'show', post_path(post.id), class: 'link' %></td></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+
+

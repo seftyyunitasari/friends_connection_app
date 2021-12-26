@@ -1,9 +1,26 @@
-<h1>Confirmation Page</h1>
-<%= form_with(model: @post, local: true, url: confirmation_page) do |f| %>
-  <%= f.hidden_field :description %>
-  <%= f.hidden_field :image_cache %>
-  <p>Description: <%= @post.description %></p>
-  <p>Image: <%= image_tag(@post.image.url) if @post.image && @post.image.url %></p>
-  <%= f.submit 'Post' %>
-  <%= f.submit 'Return', name: 'back' %>
-<% end %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/new_post.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/confirm.css">
+
+<%= form_with(model: @post, local: true) do |f| %>
+  
+  <div class="new_post">
+    <div class="post_top">
+      <img class="user_avatar" src="/images/avatar.jpg">
+      <h3><%= @post.user.name %></h3>
+    </div>
+    <div class="post_middle">
+      <%= @post.description %>
+      <%= f.hidden_field :description %>
+      <br/>
+      <br/>
+      <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
+      <%= f.hidden_field :image_cache %>
+    </div>
+    <div class="post_bottom">
+      <div class="post_options">
+        <%= f.submit 'Return', name: 'back' %>
+        <%= f.submit "post" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
